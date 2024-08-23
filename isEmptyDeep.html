@@ -1,0 +1,46 @@
+/**
+
+ * Описание задачи: Напишите функцию, которая делает глубокую проверку на пустоту объекта.
+ * Пустые значения: '', null, NaN, undefined, [], {}
+ * Ожидаемый результат: ({}) => true,
+ ({ a: { b: undefined } }) => true,
+ ({ a: { b: [] } }) => true
+ * @param {Object} object - любой объект
+ * @returns {boolean}
+ */
+
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Intersection of Objects</title>
+ </head>
+ <body>
+     <script>
+ const isEmptyDeep = (object) => {
+    if (object === null || object === undefined || object === '' || Number.isNaN(object)) {
+        return true;
+    }
+    if (typeof object !== 'object') {
+        return false;
+    }
+    if (Array.isArray(object)) {
+        return object.length === 0 || object.every(isEmptyDeep);
+    }
+    return Object.keys(object).length === 0 || Object.values(object).every(isEmptyDeep);
+};
+const data = {a: {b: undefined}};
+const data2 = {a: {b: 1}};
+const data3 = {a: {b: {c: []}}};
+
+
+console.log(isEmptyDeep(data));
+console.log(isEmptyDeep(data2));
+console.log(isEmptyDeep(data3));
+
+
+ </script>
+ </body>
+ </html>
+  

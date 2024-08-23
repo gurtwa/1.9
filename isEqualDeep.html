@@ -1,0 +1,59 @@
+/**
+
+ * Описание задачи: Напишите функцию, которая делает глубокое сравнение объектов.
+ * Ожидаемый результат: True если объекты идентичны ({ a: 1, b: { c: 1 } }, { a: 1, b: { c: 1 } }) => true
+ * @param {Object} firstObj - Объект с любыми значениями
+ * @param {Object} secondObj - Объект с любыми значениями
+ * @returns {boolean}
+ */
+export const isEqualDeep = (element) => {
+    throw new Error(`Напишите здесь свое решение ${element}`);
+};
+const data = {a: 1, b: {c: 1}};
+const data2 = {a: 1, b: {c: 1}};
+const data3 = {a: 1, b: {c: 2}};
+console.log(isEqualDeep(data, data2)); // true
+console.log(isEqualDeep(data, data3)); // false
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Intersection of Objects</title>
+ </head>
+ <body>
+     <script>
+ const isEqualDeep = (firstObj, secondObj) => {
+    if (firstObj === secondObj) {
+        return true;
+    }
+    if (typeof firstObj !== 'object' || firstObj === null || typeof secondObj !== 'object' || secondObj === null) {
+        return false;
+    }
+    const keys1 = Object.keys(firstObj);
+    const keys2 = Object.keys(secondObj);
+    if (keys1.length !== keys2.length) {
+        return false;
+    }
+    for (let key of keys1) {
+        const value1 = firstObj[key];
+        const value2 = secondObj[key];
+        const areObjects = typeof value1 === 'object' && value1 !== null && typeof value2 === 'object' && value2 !== null;
+        if (areObjects && !isEqualDeep(value1, value2)) {
+            return false;
+        } else if (!areObjects && value1 !== value2) {
+            return false;
+        }
+    }
+    return true;
+};
+
+const data = {a: 1, b: {c: 1}};
+const data2 = {a: 1, b: {c: 1}};
+const data3 = {a: 1, b: {c: 2}};
+console.log(isEqualDeep(data, data2));
+console.log(isEqualDeep(data, data3));
+
+ </script>
+ </body>
+ </html>
